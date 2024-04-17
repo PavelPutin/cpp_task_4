@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.27)
-project(untitled)
+project(cpp_task4)
+
+add_subdirectory(SynonymTableLib)
+add_subdirectory(GoogleTest)
+include_directories(SynonymTableLib GoogleTest)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_AUTOMOC ON)
@@ -14,11 +18,12 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(untitled main.cpp)
-target_link_libraries(untitled
+add_executable(cpp_task4 main.cpp)
+target_link_libraries(cpp_task4
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        SynonymTableLib
 )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
