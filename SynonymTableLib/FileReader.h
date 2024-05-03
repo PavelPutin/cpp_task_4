@@ -10,20 +10,19 @@
 
 template <class Type> class FileReader {
 public:
-    explicit FileReader(const std::string &filePath);
+    FileReader(std::string filePath);
+    ~FileReader() = default;
 
     Type* read(Type *reader(const std::ifstream &in));
-    std::string& getFilePath();
+    const std::string& getFilePath();
 
 private:
-    std::string& filePath;
+    std::string filePath;
 };
 
 
 template <class Type>
-FileReader<Type>::FileReader(const std::string &filePath) {
-    this->filePath = filePath;
-}
+FileReader<Type>::FileReader(std::string filePath) : filePath(filePath) {}
 
 template <class Type>
 Type* FileReader<Type>::read(Type *reader(const std::ifstream &in))
@@ -43,7 +42,7 @@ Type* FileReader<Type>::read(Type *reader(const std::ifstream &in))
 }
 
 template <class Type>
-std::string& FileReader<Type>::getFilePath()
+const std::string& FileReader<Type>::getFilePath()
 {
     return filePath;
 }
