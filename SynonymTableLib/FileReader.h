@@ -12,11 +12,12 @@
 template <class Type> class FileReader {
 public:
     FileReader(std::string filePath);
-    ~FileReader() = default;
+    virtual ~FileReader() = default;
 
-    Type* read(Type *reader(const std::ifstream &in));
+    Type* read();
     const std::string& getFilePath();
-
+protected:
+    virtual Type* parse(std::ifstream &in) = 0;
 private:
     std::string filePath;
 };
@@ -26,19 +27,19 @@ template <class Type>
 FileReader<Type>::FileReader(std::string filePath) : filePath(std::move(filePath)) {}
 
 template <class Type>
-Type* FileReader<Type>::read(Type *reader(const std::ifstream &in))
+Type* FileReader<Type>::read()
 {
     std::ifstream in(filePath);
 
     if (in.is_open())
     {
-        Type *result = reader(in);
+        Type *result = parse(in);
         in.close();
         return result;
     }
     else {
         in.close();
-        throw std::invalid_argument(std::sprintf("can't open file %s", filePath.c_str()));
+        throw std::invalid_argument("can't open file " + filePath);
     }
 }
 
