@@ -7,7 +7,7 @@ SynonymTable* SynonymTableFileReader::parse(std::ifstream &in) {
     auto initMap = new std::map<std::string, std::vector<std::string>>();
 
 
-    for (std::string word, synonym; std::getline(in, word, ' ') && std::getline(in, synonym, ' ');) {
+    for (std::string word, synonym; std::getline(in, word, ' ') && std::getline(in, synonym, '\n');) {
         if (initMap->count(word)) {
             initMap->find(word)->second.push_back(synonym);
         } else {

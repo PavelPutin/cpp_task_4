@@ -4,7 +4,8 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} lib/googlemo
 include_directories("../SynonymTableLib")
 add_executable(Google_Tests_run SynonymTableTest.cpp
         WordsListTest.cpp
-        WordsListFileReaderTest.cpp)
+        WordsListFileReaderTest.cpp
+        SynonymTableFileReaderTest.cpp)
 
 target_link_libraries(Google_Tests_run
         gtest
