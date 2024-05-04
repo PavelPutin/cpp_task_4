@@ -5,6 +5,8 @@ set(HEADER_FILES SynonymTable.h WordsList.h)
 set(SOURCE_FILES SynonymTable.cpp WordsList.cpp
         FileReader.h
         WordsListFileReader.h
-        WordsListFileReader.cpp)
+        WordsListFileReader.cpp
+        SynonymTableFileReader.h
+        SynonymTableFileReader.cpp)
 
 add_library(SynonymTableLib STATIC ${HEADER_FILES} ${SOURCE_FILES})
