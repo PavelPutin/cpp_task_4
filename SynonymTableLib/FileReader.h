@@ -7,6 +7,7 @@
 
 #include <string>
 #include <fstream>
+#include <utility>
 
 template <class Type> class FileReader {
 public:
@@ -22,7 +23,7 @@ private:
 
 
 template <class Type>
-FileReader<Type>::FileReader(std::string filePath) : filePath(filePath) {}
+FileReader<Type>::FileReader(std::string filePath) : filePath(std::move(filePath)) {}
 
 template <class Type>
 Type* FileReader<Type>::read(Type *reader(const std::ifstream &in))
