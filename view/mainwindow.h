@@ -7,23 +7,14 @@
 
 #include <QMainWindow>
 #include "ui_mainwindow.h"
+namespace Ui {
+    class MainWindow : public QMainWindow, public Ui_MainWindow  {
+    Q_OBJECT
 
-
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
-
-class MainWindow : public QMainWindow {
-Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-
-    ~MainWindow() override;
-
-private:
-    Ui::MainWindow *ui;
-};
+    public:
+        explicit MainWindow(QWidget *parent = nullptr);
+    };
+}
 
 
 #endif //CPP_TASK4_MAINWINDOW_H
