@@ -1,0 +1,2 @@
+D:\Qt\5.15.2\mingw81_64\bin\uic.exe .\view\mainwindow.ui | set-content .\view\ui_mainwindow.h
+потом нужно удалить в .\view\ui_mainwindow.h строчки с объявлением MainWindow
