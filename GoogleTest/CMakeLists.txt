@@ -5,7 +5,8 @@ include_directories("../SynonymTableLib")
 add_executable(Google_Tests_run SynonymTableTest.cpp
         WordsListTest.cpp
         WordsListFileReaderTest.cpp
-        SynonymTableFileReaderTest.cpp)
+        SynonymTableFileReaderTest.cpp
+        WordsListFileWriterTest.cpp)
 
 target_link_libraries(Google_Tests_run
         gtest
