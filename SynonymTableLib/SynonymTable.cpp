@@ -17,19 +17,20 @@ SynonymTable::~SynonymTable() {
 }
 //#include <iostream>
 std::string SynonymTable::getRandomSynonymFor(const std::string &word) {
-    std::vector synonym = (*synonyms)[word];
-//    for (auto &v : synonym)
-//        std::cout << v << " ";
-//    std::cout << std::endl;
-    std::vector<std::string> out;
-    std::sample(
-            synonym.begin(),
-            synonym.end(),
-            std::back_inserter(out),
-            1,
-            std::mt19937{std::random_device{}()}
-            );
-    return out.at(0);
+    if (synonyms->count(word)) {
+        std::vector synonym = (*synonyms)[word];
+        std::vector<std::string> out;
+        std::sample(
+                synonym.begin(),
+                synonym.end(),
+                std::back_inserter(out),
+                1,
+                std::mt19937{std::random_device{}()}
+        );
+        return out.at(0);
+    } else {
+        return word;
+    }
 }
 
 const std::map<std::string, std::vector<std::string>> *SynonymTable::getValues() {
