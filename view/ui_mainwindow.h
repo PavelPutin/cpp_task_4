@@ -179,7 +179,7 @@ public:
         QObject::connect(MainWindow, SIGNAL(synonymsTableChanged()), MainWindow, SLOT(updateSynonymsTableTreeView()));
         QObject::connect(MainWindow, SIGNAL(errorOccured()), MainWindow, SLOT(showErrorDialog()));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -211,7 +211,7 @@ public:
 #endif // QT_CONFIG(shortcut)
         inputWordsListFilePathLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         synonymizePushButton->setText(QCoreApplication::translate("MainWindow", ">>", nullptr));
-        outputWordsListFilePathLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        outputWordsListFilePathLabel->setText(QCoreApplication::translate("MainWindow", "\320\241\320\270\320\275\320\276\320\275\320\270\320\274\321\213 \320\264\320\273\321\217 \321\201\320\273\320\276\320\262", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(wordsListsTab), QCoreApplication::translate("MainWindow", "\320\241\320\273\320\276\320\262\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(synonymsTableTab), QCoreApplication::translate("MainWindow", "\320\242\320\260\320\261\320\273\320\270\321\206\320\260 \321\201\320\270\320\275\320\276\320\275\320\270\320\274\320\276\320\262", nullptr));
         menu->setTitle(QCoreApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273", nullptr));
