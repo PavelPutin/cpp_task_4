@@ -21,6 +21,8 @@ find_package(Qt5 COMPONENTS
 add_executable(cpp_task4 main.cpp
         view/ui_mainwindow.h
         view/mainwindow.cpp
+        view/SynonymTableToStandardItemModelConverter.h
+        view/SynonymTableToStandardItemModelConverter.cpp
 )
 target_link_libraries(cpp_task4
         Qt5::Core

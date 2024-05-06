@@ -7,6 +7,7 @@
 
 #include <QMainWindow>
 #include <QStringListModel>
+#include <QStandardItemModel>
 #include "ui_mainwindow.h"
 #include "WordsListFileReader.h"
 #include "WordsListFileWriter.h"
@@ -23,10 +24,14 @@ namespace Ui {
         WordsList *inputWords = nullptr;
         QStringListModel *outputWordsListModel = new QStringListModel(outputWordsListView);
         WordsList *outputWords = nullptr;
+        QStandardItemModel *synonymsTableModel = new QStandardItemModel();
         SynonymTable *synonyms = nullptr;
+
+        void setupSynonymsTableTreeView();
     signals:
         void inputWordsChanged();
         void outputWordsChanged();
+        void synonymsTableChanged();
     private slots:
         void loadWordsList();
         void loadSynonymsTable();
@@ -34,6 +39,7 @@ namespace Ui {
         void synonymize();
         void updateInputWordsListView();
         void updateOutputWordsListView();
+        void updateSynonymsTableTreeView();
     };
 }
 

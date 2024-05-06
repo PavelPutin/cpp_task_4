@@ -111,6 +111,7 @@ public:
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         synonymizePushButton = new QPushButton(widget_3);
         synonymizePushButton->setObjectName(QString::fromUtf8("synonymizePushButton"));
+        synonymizePushButton->setCursor(QCursor(Qt::PointingHandCursor));
 
         verticalLayout_3->addWidget(synonymizePushButton);
 
@@ -175,8 +176,9 @@ public:
         QObject::connect(synonymizePushButton, SIGNAL(clicked()), MainWindow, SLOT(synonymize()));
         QObject::connect(MainWindow, SIGNAL(inputWordsChanged()), MainWindow, SLOT(updateInputWordsListView()));
         QObject::connect(MainWindow, SIGNAL(outputWordsChanged()), MainWindow, SLOT(updateOutputWordsListView()));
+        QObject::connect(MainWindow, SIGNAL(synonymsTableChanged()), MainWindow, SLOT(updateSynonymsTableTreeView()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

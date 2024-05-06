@@ -12,12 +12,13 @@
 #include <random>
 
 class SynonymTable {
+    friend class BaseSynonymTableConverter;
 public:
     SynonymTable(std::map<std::string, std::vector<std::string>> *init);
     ~SynonymTable();
 
     std::string getRandomSynonymFor(const std::string &word);
-
+    const std::map<std::string, std::vector<std::string>>* getValues();
 private:
     std::map<std::string, std::vector<std::string>> *synonyms;
 };

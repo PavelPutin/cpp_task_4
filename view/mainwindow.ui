@@ -24,7 +24,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="wordsListsTab">
        <property name="sizePolicy">
@@ -260,15 +260,33 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>synonymsTableChanged()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>updateSynonymsTableTreeView()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>inputWordsChanged()</signal>
   <signal>outputWordsChanged()</signal>
+  <signal>synonymsTableChanged()</signal>
   <slot>loadWordsList()</slot>
   <slot>loadSynonymsTable()</slot>
   <slot>saveWordsList()</slot>
   <slot>synonymize()</slot>
   <slot>updateInputWordsListView()</slot>
   <slot>updateOutputWordsListView()</slot>
+  <slot>updateSynonymsTableTreeView()</slot>
  </slots>
 </ui>

@@ -27,3 +27,7 @@ std::string SynonymTable::getRandomSynonymFor(const std::string &word) {
             );
     return out.at(0);
 }
+
+const std::map<std::string, std::vector<std::string>> *SynonymTable::getValues() {
+    return synonyms;
+}

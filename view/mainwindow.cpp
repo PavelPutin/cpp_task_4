@@ -7,13 +7,17 @@
 #include <iostream>
 #include <QFileDialog>
 #include <QStringListModel>
+#include <QStandardItemModel>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "SynonymTableToStandardItemModelConverter.h"
 
 namespace Ui {
     MainWindow::MainWindow(QWidget *parent) :
             QMainWindow(parent), Ui_MainWindow() {
         setupUi(this);
+
+        setupSynonymsTableTreeView();
     }
 
     void MainWindow::loadWordsList() {
@@ -53,6 +57,10 @@ namespace Ui {
 
             try {
                 synonyms = fileReader.read();
+
+                SynonymTableToStandardItemModelConverter converter(synonymsTableModel, synonyms);
+                converter.convert();
+                emit synonymsTableChanged();
 
                 outputWords = nullptr;
                 emit outputWordsChanged();
@@ -96,5 +104,26 @@ namespace Ui {
         }
         outputWordsListModel->setStringList(inputWordsList);
         outputWordsListView->setModel(outputWordsListModel);
+    }
+
+    void MainWindow::updateSynonymsTableTreeView() {
+        synonymsTableTreeView->setModel(synonymsTableModel);
+    }
+
+    void MainWindow::setupSynonymsTableTreeView() {
+        synonymsTableModel->setHorizontalHeaderLabels(QStringList{QString("Слово")});
+
+        QStandardItem *parentItem = synonymsTableModel->invisibleRootItem();
+        QStandardItem *item = new QStandardItem(QString("Пусто"));
+        item->setEditable(false);
+        parentItem->appendRow(item);
+        synonymsTableTreeView->setModel(synonymsTableModel);
+//        for (int i = 0; i < 4; i++) {
+//            QStandardItem *item = new QStandardItem(QString("hello %0").arg(i));
+//            parentItem->appendRow(item);
+//            parentItem = item;
+//        }
+//
+//        synonymsTableTreeView->setModel(synonymsTableModel);
     }
 }
