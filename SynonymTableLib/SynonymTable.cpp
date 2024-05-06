@@ -2,9 +2,13 @@
 // Created by RobotComp.ru on 30.03.2024.
 //
 
+#include <stdexcept>
 #include "SynonymTable.h"
 
 SynonymTable::SynonymTable(std::map<std::string, std::vector<std::string>> *init) {
+    if (init == nullptr) {
+        throw std::invalid_argument("Synonym table shouldn't be nullptr");
+    }
     synonyms = init;
 }
 
