@@ -276,11 +276,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>MainWindow</sender>
+   <signal>errorOccured()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showErrorDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>404</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <signal>inputWordsChanged()</signal>
   <signal>outputWordsChanged()</signal>
   <signal>synonymsTableChanged()</signal>
+  <signal>errorOccured()</signal>
   <slot>loadWordsList()</slot>
   <slot>loadSynonymsTable()</slot>
   <slot>saveWordsList()</slot>
@@ -288,5 +305,6 @@
   <slot>updateInputWordsListView()</slot>
   <slot>updateOutputWordsListView()</slot>
   <slot>updateSynonymsTableTreeView()</slot>
+  <slot>showErrorDialog()</slot>
  </slots>
 </ui>

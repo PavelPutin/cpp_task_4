@@ -32,6 +32,7 @@ namespace Ui {
         void inputWordsChanged();
         void outputWordsChanged();
         void synonymsTableChanged();
+        void errorOccured();
     private slots:
         void loadWordsList();
         void loadSynonymsTable();
@@ -40,6 +41,7 @@ namespace Ui {
         void updateInputWordsListView();
         void updateOutputWordsListView();
         void updateSynonymsTableTreeView();
+        void showErrorDialog();
     };
 }
 

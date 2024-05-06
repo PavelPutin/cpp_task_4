@@ -177,6 +177,7 @@ public:
         QObject::connect(MainWindow, SIGNAL(inputWordsChanged()), MainWindow, SLOT(updateInputWordsListView()));
         QObject::connect(MainWindow, SIGNAL(outputWordsChanged()), MainWindow, SLOT(updateOutputWordsListView()));
         QObject::connect(MainWindow, SIGNAL(synonymsTableChanged()), MainWindow, SLOT(updateSynonymsTableTreeView()));
+        QObject::connect(MainWindow, SIGNAL(errorOccured()), MainWindow, SLOT(showErrorDialog()));
 
         tabWidget->setCurrentIndex(1);
 

@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QStringListModel>
 #include <QStandardItemModel>
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "SynonymTableToStandardItemModelConverter.h"
@@ -35,7 +36,7 @@ namespace Ui {
                 outputWords = nullptr;
                 emit outputWordsChanged();
             } catch (std::invalid_argument &error) {
-                std::cout << "Не удалось открыть файл " + fileName.toStdString() << std::endl;
+                emit errorOccured();
             }
         }
     }
@@ -66,7 +67,7 @@ namespace Ui {
                 emit outputWordsChanged();
 //                emit synonymizePushButton->enable
             } catch (std::invalid_argument &error) {
-                std::cout << "Не удалось открыть файл " + fileName.toStdString() << std::endl;
+                emit errorOccured();
             }
         }
     }
@@ -79,7 +80,7 @@ namespace Ui {
             try {
                 fileWriter.write();
             } catch (std::invalid_argument &error) {
-                std::cout << "Не удалось открыть файл " + fileName.toStdString() << std::endl;
+                emit errorOccured();
             }
         }
     }
@@ -108,6 +109,11 @@ namespace Ui {
 
     void MainWindow::updateSynonymsTableTreeView() {
         synonymsTableTreeView->setModel(synonymsTableModel);
+    }
+
+    void MainWindow::showErrorDialog() {
+        std::unique_ptr<QMessageBox> errorMessage = std::make_unique<QMessageBox>();
+        errorMessage->critical(this, "Ошибка", "Произошла ошибка");
     }
 
     void MainWindow::setupSynonymsTableTreeView() {
