@@ -12,6 +12,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "SynonymTableToStandardItemModelConverter.h"
+#include <QDebug>
 
 namespace Ui {
     MainWindow::MainWindow(QWidget *parent) :
@@ -22,7 +23,7 @@ namespace Ui {
     }
 
     void MainWindow::loadWordsList() {
-        // todo: make only .txt file extension
+        qInfo() << "load words list";
         std::unique_ptr<QFileDialog> fileDialog = std::make_unique<QFileDialog>();
         QString fileName = fileDialog->getOpenFileName();
         if (not fileName.isNull()) {
@@ -36,12 +37,14 @@ namespace Ui {
                 outputWords = nullptr;
                 emit outputWordsChanged();
             } catch (std::invalid_argument &error) {
+                qCritical() << "can't load words list";
                 emit errorOccured();
             }
         }
     }
 
     void MainWindow::updateInputWordsListView() {
+        qInfo() << "update input words list view";
         QStringList inputWordsList;
         std::for_each(inputWords->begin(), inputWords->end(), [&inputWordsList](std::string &word) {
             inputWordsList << QString(word.c_str());
@@ -51,6 +54,7 @@ namespace Ui {
     }
 
     void MainWindow::loadSynonymsTable() {
+        qInfo() << "load synonyms table";
         std::unique_ptr<QFileDialog> fileDialog = std::make_unique<QFileDialog>();
         QString fileName = fileDialog->getOpenFileName();
         if (not fileName.isNull()) {
@@ -65,14 +69,15 @@ namespace Ui {
 
                 outputWords = nullptr;
                 emit outputWordsChanged();
-//                emit synonymizePushButton->enable
             } catch (std::invalid_argument &error) {
+                qCritical() << "can't load synonyms table";
                 emit errorOccured();
             }
         }
     }
 
     void MainWindow::saveWordsList() {
+        qInfo() << "save words list";
         std::unique_ptr<QFileDialog> fileDialog = std::make_unique<QFileDialog>();
         QString fileName = fileDialog->getSaveFileName();
         if (not fileName.isNull()) {
@@ -80,12 +85,14 @@ namespace Ui {
             try {
                 fileWriter.write();
             } catch (std::invalid_argument &error) {
+                qCritical() << "can't save words list";
                 emit errorOccured();
             }
         }
     }
 
     void MainWindow::synonymize() {
+        qInfo() << "synonymize";
         if (inputWords == nullptr) {
             emit loadWordsList();
         }
@@ -97,6 +104,7 @@ namespace Ui {
     }
 
     void MainWindow::updateOutputWordsListView() {
+        qInfo() << "update output words list view";
         QStringList inputWordsList;
         if (outputWords != nullptr) {
             std::for_each(outputWords->begin(), outputWords->end(), [&inputWordsList](std::string &word) {
@@ -108,6 +116,7 @@ namespace Ui {
     }
 
     void MainWindow::updateSynonymsTableTreeView() {
+        qInfo() << "update synonyms table tree view";
         synonymsTableTreeView->setModel(synonymsTableModel);
     }
 
@@ -117,6 +126,7 @@ namespace Ui {
     }
 
     void MainWindow::setupSynonymsTableTreeView() {
+        qInfo() << "setup synonyms table tree view";
         synonymsTableModel->setHorizontalHeaderLabels(QStringList{QString("Слово")});
 
         QStandardItem *parentItem = synonymsTableModel->invisibleRootItem();
@@ -124,12 +134,5 @@ namespace Ui {
         item->setEditable(false);
         parentItem->appendRow(item);
         synonymsTableTreeView->setModel(synonymsTableModel);
-//        for (int i = 0; i < 4; i++) {
-//            QStandardItem *item = new QStandardItem(QString("hello %0").arg(i));
-//            parentItem->appendRow(item);
-//            parentItem = item;
-//        }
-//
-//        synonymsTableTreeView->setModel(synonymsTableModel);
     }
 }
